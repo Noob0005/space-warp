@@ -44,8 +44,8 @@ export const Scene = ({}: SceneProps) => {
   useFrame((state, delta) => {
     if (!meshRef.current) return;
 
-    // Increase the velocity by 4x
-    const velocity = 4 * (1 / Math.pow(state.clock.elapsedTime + 1, state.clock.elapsedTime + 1));
+    // Increase the velocity by 2x
+    const velocity = 2 * (1 / Math.pow(state.clock.elapsedTime + 1, state.clock.elapsedTime + 1));
     
     for (let i = 0; i < COUNT; i++) {
       meshRef.current.getMatrixAt(i, temp);
@@ -116,4 +116,4 @@ export const Scene = ({}: SceneProps) => {
 
 function generatePos() {
   return (Math.random() - 0.5) * XY_BOUNDS;
-    }
+                                       }
