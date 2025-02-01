@@ -44,8 +44,8 @@ export const Scene = ({}: SceneProps) => {
   useFrame((state, delta) => {
     if (!meshRef.current) return;
 
-    // Increase the velocity by 2x
-    const velocity = 2 * (1 / Math.pow(state.clock.elapsedTime + 1, state.clock.elapsedTime + 1));
+    // Increase the velocity by 4x
+    const velocity = 4 * (1 / Math.pow(state.clock.elapsedTime + 1, state.clock.elapsedTime + 1));
     
     for (let i = 0; i < COUNT; i++) {
       meshRef.current.getMatrixAt(i, temp);
@@ -67,11 +67,7 @@ export const Scene = ({}: SceneProps) => {
       meshRef.current.setMatrixAt(i, tempObject.matrix);
 
       // update and apply color (change to light blue)
-      if (tempPos.z > 0) {
-        tempColor.setRGB(173 / 255, 216 / 255, 230 / 255); // Light blue color
-      } else {
-        tempColor.setRGB(173 / 255, 216 / 255, 230 / 255); // Light blue color
-      }
+      tempColor.setRGB(173 / 255, 216 / 255, 230 / 255); // Light blue color
       meshRef.current.setColorAt(i, tempColor);
     }
     meshRef.current.instanceMatrix.needsUpdate = true;
@@ -120,4 +116,4 @@ export const Scene = ({}: SceneProps) => {
 
 function generatePos() {
   return (Math.random() - 0.5) * XY_BOUNDS;
-      }
+    }
