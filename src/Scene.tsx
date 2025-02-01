@@ -40,12 +40,13 @@ export const Scene = ({}: SceneProps) => {
   const tempPos = new THREE.Vector3();
   const tempObject = new THREE.Object3D();
   const tempColor = new THREE.Color();
+
   useFrame((state, delta) => {
     if (!meshRef.current) return;
 
-    // https://www.wolframalpha.com/input?i=1%2F%28x%5Ex%29
-    const velocity =
-      1 / Math.pow(state.clock.elapsedTime + 1, state.clock.elapsedTime + 1);
+    // Increase the velocity by 2x
+    const velocity = 2 * (1 / Math.pow(state.clock.elapsedTime + 1, state.clock.elapsedTime + 1));
+    
     for (let i = 0; i < COUNT; i++) {
       meshRef.current.getMatrixAt(i, temp);
 
@@ -65,14 +66,11 @@ export const Scene = ({}: SceneProps) => {
       tempObject.updateMatrix();
       meshRef.current.setMatrixAt(i, tempObject.matrix);
 
-      // update and apply color
+      // update and apply color (change to light blue)
       if (tempPos.z > 0) {
-        tempColor.r = tempColor.g = tempColor.b = 1;
+        tempColor.setRGB(173 / 255, 216 / 255, 230 / 255); // Light blue color
       } else {
-        tempColor.r =
-          tempColor.g =
-          tempColor.b =
-            1 - tempPos.z / (-Z_BOUNDS / 2);
+        tempColor.setRGB(173 / 255, 216 / 255, 230 / 255); // Light blue color
       }
       meshRef.current.setColorAt(i, tempColor);
     }
@@ -122,4 +120,4 @@ export const Scene = ({}: SceneProps) => {
 
 function generatePos() {
   return (Math.random() - 0.5) * XY_BOUNDS;
-}
+      }
